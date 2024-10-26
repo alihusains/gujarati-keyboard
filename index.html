@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Gujarati On-Screen Keyboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Gujarati&display=swap" rel="stylesheet">
+  <style>
+    * {
+      font-family: 'Noto Serif Gujarati', serif;
+    }
+    body {
+      font-family: 'Noto Serif Gujarati', serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+    }
+    #keyboard {
+      width: 100%;
+      margin-top: 20px;
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(50px, 1fr));
+      gap: 10px;
+    }
+    .key {
+      width: 100%;
+      height: 50px;
+      font-size: 1.2em;
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+    }
+    .key sup {
+      font-size: 0.6em;
+      color: gray;
+    }
+    .keyspace {
+      margin-top: 10px;
+      width: 40%;
+      height: 50px;
+      font-size: 1.5em;
+    }
+    #textbox {
+      width: 90%;
+      height: 300px;
+      margin-top: 5px;
+      padding: 10px;
+      font-size: 16px;
+    }
+    /* Media queries */
+    @media only screen and (max-width: 600px) {
+      #keyboard {
+        grid-template-columns: repeat(auto-fit, minmax(25px, 1fr));
+      }
+      .key {
+        width: 100%;
+        height: 30px;
+        font-size: 0.8em;
+        text-align: center;
+      }
+      .keyspace {
+        margin-top: 10px;
+        width: 40%;
+        height: 30px;
+        font-size: 0.8em;
+      }
+    }
+  </style>
+</head>
+<body>
+  <h3>Gujarati Keyboard</h3>
+  <textarea id="textbox" cols="100" rows="5"></textarea>
+  <div id="keyboard">
+    <!-- Define keys here -->
+    <button class="key" onclick="insertText('1')">1<sup>1</sup></button>
+    <button class="key" onclick="insertText('2')">2<sup>2</sup></button>
+    <button class="key" onclick="insertText('3')">3<sup>3</sup></button>
+    <button class="key" onclick="insertText('4')">4<sup>4</sup></button>
+    <button class="key" onclick="insertText('5')">5<sup>5</sup></button>
+    <button class="key" onclick="insertText('6')">6<sup>6</sup></button>
+    <button class="key" onclick="insertText('7')">7<sup>7</sup></button>
+    <button class="key" onclick="insertText('8')">8<sup>8</sup></button>
+    <button class="key" onclick="insertText('9')">9<sup>9</sup></button>
+    <button class="key" onclick="insertText('0')">0<sup>0</sup></button>
+    <button class="key" onclick="insertText('!')">!<sup>!</sup></button>
+    <button class="key" onclick="insertText(':')">:<sup>:</sup></button>
+    <button class="key" onclick="insertText(',')">,<sup>,</sup></button>
+    <button class="key" onclick="insertText('.')">.<sup>.</sup></button>
+    <button class="key" onclick="insertText('&quot;')">&#34;<sup>"</sup></button>
+    <button class="key" onclick="insertText('ા')">ા<sup>a</sup></button>
+    <button class="key" onclick="insertText('િ')">િ<sup>i</sup></button>
+    <button class="key" onclick="insertText('ી')">ી<sup>I</sup></button>
+    <button class="key" onclick="insertText('ુ')">ુ<sup>u</sup></button>
+    <button class="key" onclick="insertText('ૂ')">ૂ<sup>U</sup></button>
+    <button class="key" onclick="insertText('ૃ')">ૃ<sup>R</sup></button>
+    <button class="key" onclick="insertText('ે')">ે<sup>E</sup></button>
+    <button class="key" onclick="insertText('ો')">ો<sup>O</sup></button>
+    <button class="key" onclick="insertText('ક')">ક<sup>K</sup></button>
+    <button class="key" onclick="insertText('ખ')">ખ<sup>KH</sup></button>
+    <button class="key" onclick="insertText('ગ')">ગ<sup>G</sup></button>
+    <button class="key" onclick="insertText('ઘ')">ઘ<sup>GH</sup></button>
+    <button class="key" onclick="insertText('ઙ')">ઙ<sup>NG</sup></button>
+    <button class="key" onclick="insertText('ચ')">ચ<sup>C</sup></button>
+    <button class="key" onclick="insertText('છ')">છ<sup>CH</sup></button>
+    <button class="key" onclick="insertText('જ')">જ<sup>J</sup></button>
+    <button class="key" onclick="insertText('ઝ')">ઝ<sup>JH</sup></button>
+    <button class="key" onclick="insertText('ઞ')">ઞ<sup>NY</sup></button>
+    <button class="key" onclick="insertText('ટ')">ટ<sup>T</sup></button>
+    <button class="key" onclick="insertText('ઠ')">ઠ<sup>TH</sup></button>
+    <button class="key" onclick="insertText('ડ')">ડ<sup>D</sup></button>
+    <button class="key" onclick="insertText('ઢ')">ઢ<sup>DH</sup></button>
+    <button class="key" onclick="insertText('ણ')">ણ<sup>N</sup></button>
+    <button class="key" onclick="insertText('ત')">ત<sup>t</sup></button>
+    <button class="key" onclick="insertText('થ')">થ<sup>th</sup></button>
+    <button class="key" onclick="insertText('દ')">દ<sup>d</sup></button>
+    <button class="key" onclick="insertText('ધ')">ધ<sup>dh</sup></button>
+    <button class="key" onclick="insertText('ન')">ન<sup>n</sup></button>
+    <button class="key" onclick="insertText('પ')">પ<sup>p</sup></button>
+    <button class="key" onclick="insertText('ફ')">ફ<sup>f</sup></button>
+    <button class="key" onclick="insertText('બ')">બ<sup>b</sup></button>
+    <button class="key" onclick="insertText('ભ')">ભ<sup>bh</sup></button>
+    <button class="key" onclick="insertText('મ')">મ<sup>m</sup></button>
+    <button class="key" onclick="insertText('ય')">ય<sup>y</sup></button>
+    <button class="key" onclick="insertText('ર')">ર<sup>r</sup></button>
+    <button class="key" onclick="insertText('લ')">લ<sup>l</sup></button>
+    <button class="key" onclick="insertText('ળ')">ળ<sup>L</sup></button>
+    <button class="key" onclick="insertText('વ')">વ<sup>v</sup></button>
+    <button class="key" onclick="insertText('શ')">શ<sup>sh</sup></button>
+    <button class="key" onclick="insertText('ષ')">ષ<sup>S</sup></button>
+    <button class="key" onclick="insertText('સ')">સ<sup>s</sup></button>
+    <button class="key" onclick="insertText('હ')">હ<sup>h</sup></button>
+    <button class="key" onclick="insertText('અ')">અ<sup>A</sup></button>
+    <button class="key" onclick="insertText('આ')">આ<sup>AA</sup></button>
+    <button class="key" onclick="insertText('ઈ')">ઈ<sup>I</sup></button>
+    <button class="key" onclick="insertText('ઊ')">ઊ<sup>U</sup></button>
+    <button class="key" onclick="insertText('ઋ')">ઋ<sup>R</sup></button>
+    <button class="key" onclick="insertText('એ')">એ<sup>E</sup></button>
+    <button class="key" onclick="insertText('ઐ')">ઐ<sup>AI</sup></button>
+    <button class="key" onclick="insertText('ઓ')">ઓ<sup>O</sup></button>
+    <button class="key" onclick="insertText('ઔ')">ઔ<sup>AU</sup></button>
+    <button class="key" onclick="insertText(' ')">SP<sup> </sup></button>
+    <button class="key" onclick="insertText('\n')">↵<sup>↵</sup></button>
+    <button class="key" onclick="copyToClipboard()">Copy</button>
+  </div>
+  <script>
+    function insertText(text) {
+      const textarea = document.getElementById("textbox");
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      const textValue = textarea.value;
+      textarea.value = textValue.substring(0, start) + text + textValue.substring(end);
+      textarea.selectionStart = textarea.selectionEnd = start + text.length;
+    }
+    function copyToClipboard() {
+      const textarea = document.getElementById("textbox");
+      textarea.select();
+      document.execCommand("copy");
+    }
+    document.addEventListener('keydown', function(event) {
+      const keyMap = {
+        '1': '1', '2': '2', '3': '3', '4': '4', '5': '5', '6': '6', '7': '7', '8': '8', '9': '9', '0': '0',
+        '!': '!', ':': ':', ',': ',', '.': '.', '"': '"', 'a': 'ા', 'i': 'િ', 'I': 'ી', 'u': 'ુ', 'U': 'ૂ',
+        'R': 'ૃ', 'E': 'ે', 'O': 'ો', 'K': 'ક', 'KH': 'ખ', 'G': 'ગ', 'GH': 'ઘ', 'NG': 'ઙ', 'C': 'ચ', 'CH': 'છ',
+        'J': 'જ', 'JH': 'ઝ', 'NY': 'ઞ', 'T': 'ટ', 'TH': 'ઠ', 'D': 'ડ', 'DH': 'ઢ', 'N': 'ણ', 't': 'ત', 'th': 'થ',
+        'd': 'દ', 'dh': 'ધ', 'n': 'ન', 'p': 'પ', 'f': 'ફ', 'b': 'બ', 'bh': 'ભ', 'm': 'મ', 'y': 'ય', 'r': 'ર',
+        'l': 'લ', 'L': 'ળ', 'v': 'વ', 'sh': 'શ', 'S': 'ષ', 's': 'સ', 'h': 'હ', 'A': 'અ', 'AA': 'આ', 'I': 'ઈ',
+        'U': 'ઊ', 'R': 'ઋ', 'E': 'એ', 'AI': 'ઐ', 'O': 'ઓ', 'AU': 'ઔ', ' ': ' ', '\n': '\n'
+      };
+      const char = event.key;
+      if (keyMap[char]) {
+        insertText(keyMap[char]);
+        event.preventDefault();
+      }
+    });
+  </script>
+</body>
+</html>
