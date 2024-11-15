@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="gu">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Enhanced Gujarati Keyboard</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Gujarati&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+      font-family: 'Noto Serif Gujarati', serif;
+    }
+
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    .container {
+      max-width: 1200px;
+      width: 100%;
+    }
+
+    #textbox {
+      width: 100%;
+      height: 200px;
+      margin: 20px 0;
+      padding: 15px;
+      font-size: 18px;
+      border: 2px solid #ddd;
+      border-radius: 8px;
+      resize: vertical;
+    }
+
+    #keyboard {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+      gap: 10px;
+      padding: 10px;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+    }
+
+    .key {
+      position: relative;
+      min-height: 50px;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      background-color: white;
+      cursor: pointer;
+      transition: all 0.2s;
+      padding: 4px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      font-size: 18px;
+    }
+
+    .key:hover {
+      background-color: #f0f0f0;
+      transform: translateY(-1px);
+    }
+
+    .key:active {
+      background-color: #e0e0e0;
+      transform: translateY(1px);
+    }
+
+    .key sup {
+      position: absolute;
+      top: 2px;
+      right: 2px;
+      font-size: 12px;
+      color: #666;
+    }
+
+    .key.long-press-active {
+      background-color: #e0e0e0;
+    }
+
+    .controls {
+      display: flex;
+      gap: 10px;
+      margin: 10px 0;
+    }
+
+    .control-btn {
+      padding: 8px 16px;
+      border: none;
+      border-radius: 4px;
+      background-color: #007bff;
+      color: white;
+      cursor: pointer;
+      transition: background-color 0.2s;
+    }
+
+    .control-btn:hover {
+      background-color: #0056b3;
+    }
+
+    @media (max-width: 768px) {
+      #keyboard {
+        grid-template-columns: repeat(auto-fill, minmax(40px, 1fr));
+        gap: 8px;
+      }
+
+      .key {
+        min-height: 40px;
+        font-size: 16px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>ગુજરાતી કીબોર્ડ</h2>
+    <textarea id="textbox" placeholder="અહીં લખો..."></textarea>
+    <div class="controls">
+      <button class="control-btn" onclick="clearText()">Clear</button>
+      <button class="control-btn" onclick="copyToClipboard()">Copy</button>
+    </div>
+    <div id="keyboard"></div>
+  </div>
+
+  <script>
+    const keyboardLayout = [
+      // Row 1 - Vowels
+      { char: 'અ', key: 'a', matra: ['ા', 'i', 'ી', 'u', 'ૂ', 'R', 'ૃ', 'e', 'ે', 'ai', 'o', 'ો', 'au'] },
+      { char: 'આ', key: 'A', matra: ['ા'] },
+      { char: 'ઇ', key: 'i', matra: ['િ', 'ી'] },
+      { char: 'ઈ', key: 'I', matra: ['ી'] },
+      { char: 'ઉ', key: 'u', matra: ['ુ', 'ૂ'] },
+      { char: 'ઊ', key: 'U', matra: ['ૂ'] },
+      { char: 'ઋ', key: 'R', matra: ['ૃ', 'ૄ'] },
+      { char: 'ઍ', key: 'e', matra: ['ે', 'ૅ'] },
+      { char: 'એ', key: 'E', matra: ['ે'] },
+      { char: 'ઐ', key: 'ai', matra: ['ૈ'] },
+      { char: 'ઑ', key: 'o', matra: ['ો', 'ૉ'] },
+      { char: 'ઓ', key: 'O', matra: ['ો'] },
+      { char: 'ઔ', key: 'au', matra: ['ૌ'] },
+
+      // Row 2 - Consonants
+      { char: 'ક', key: 'k' },
+      { char: 'ખ', key: 'K' },
+      { char: 'ગ', key: 'g' },
+      { char: 'ઘ', key: 'G' },
+      { char: 'ઙ', key: 'N' },
+      { char: 'ચ', key: 'c' },
+      { char: 'છ', key: 'C' },
+      { char: 'જ', key: 'j' },
+      { char: 'ઝ', key: 'J' },
+      { char: 'ઞ', key: 'NY' },
+      { char: 'ટ', key: 't' },
+      { char: 'ઠ', key: 'T' },
+      { char: 'ડ', key: 'd' },
+      { char: 'ઢ', key: 'D' },
+      { char: 'ણ', key: 'n' },
+      { char: 'ત', key: 'th' },
+      { char: 'થ', key: 'Th' },
+      { char: 'દ', key: 'dh' },
+      { char: 'ધ', key: 'Dh' },
+      { char: 'ન', key: 'n' },
+      { char: 'પ', key: 'p' },
+      { char: 'ફ', key: 'P' },
+      { char: 'બ', key: 'b' },
+      { char: 'ભ', key: 'B' },
+      { char: 'મ', key: 'm' },
+      { char: 'ય', key: 'y' },
+      { char: 'ર', key: 'r' },
+      { char: 'લ', key: 'l' },
+      { char: 'ળ', key: 'L' },
+      { char: 'વ', key: 'v' },
+      { char: 'શ', key: 'sh' },
+      { char: 'ષ', key: 'Sh' },
+      { char: 'સ', key: 's' },
+      { char: 'હ', key: 'h' },
+
+      // Special characters
+      { char: 'ૺ', key: 'sign1' },
+      { char: 'ૻ', key: 'sign2' },
+      { char: 'ૼ', key: 'sign3' },
+      { char: '૽', key: 'sign4' },
+      { char: '૾', key: 'sign5' },
+      { char: '૿', key: 'sign6' },
+      { char: '઼', key: 'nukta' },
+      { char: 'ૠ', key: 'rr' },
+      { char: 'ૡ', key: 'll' },
+      { char: 'ૢ', key: 'l1' },
+      { char: 'ૣ', key: 'l2' },
+      { char: 'ઁ', key: 'candrabindu' },
+      { char: 'ં', key: 'anusvara' },
+      { char: 'ઃ', key: 'visarga' },
+      { char: '્', key: 'virama' },
+      { char: 'ૐ', key: 'om' },
+      { char: '઻', key: 'sign7' },
+      { char: '૱', key: 'currency' }
+    ];
+
+    function createKeyboard() {
+      const keyboard = document.getElementById('keyboard');
+      keyboardLayout.forEach(key => {
+        const button = document.createElement('button');
+        button.className = 'key';
+        button.innerHTML = `${key.char}<sup>${key.key}</sup>`;
+        button.onclick = () => insertText(key.char);
+        button.onmousedown = (e) => handleLongPress(e, key);
+        keyboard.appendChild(button);
+      });
+    }
+
+    function insertText(text) {
+      const textarea = document.getElementById('textbox');
+      const start = textarea.selectionStart;
+      const end = textarea.selectionEnd;
+      textarea.value = textarea.value.substring(0, start) + text + textarea.value.substring(end);
+      textarea.selectionStart = textarea.selectionEnd = start + text.length;
+      textarea.focus();
+    }
+
+    function copyToClipboard() {
+      const textarea = document.getElementById('textbox');
+      textarea.select();
+      document.execCommand('copy');
+      textarea.setSelectionRange(textarea.selectionStart, textarea.selectionStart);
+    }
+
+    function clearText() {
+      document.getElementById('textbox').value = '';
+    }
+
+    let longPressTimeout;
+    let longPressedKey;
+
+    function handleLongPress(e, key) {
+      longPressTimeout = setTimeout(() => {
+        longPressedKey = key;
+        showMatraOptions(key);
+      }, 500);
+    }
+
+    function handleLongPressEnd() {
+      clearTimeout(longPressTimeout);
+      if (longPressedKey) {
+        hideMatraOptions();
+        longPressedKey = null;
+      }
+    }
+
+    function showMatraOptions(key) {
+      const keyboard = document.getElementById('keyboard');
+      keyboard.classList.add('long-press-active');
+      key.matra.forEach(matra => {
+        const button = document.createElement('button');
+        button.className = 'key';
+        button.innerHTML = `${longPressedKey.char}${matra}<sup>${longPressedKey.key + matra}</sup>`;
+        button.onclick = () => {
+          insertText(longPressedKey.char + matra);
+          hideMatraOptions();
+        };
+        keyboard.appendChild(button);
+      });
+    }
+
+    function hideMatraOptions() {
+      const keyboard = document.getElementById('keyboard');
+      keyboard.classList.remove('long-press-active');
+      while (keyboard.children.length > keyboardLayout.length) {
+        keyboard.removeChild(keyboard.lastChild);
+      }
+    }
+
+    document.addEventListener('keydown', function(event) {
+      const key = event.key.toLowerCase();
+      const matchedKey = keyboardLayout.find(k => k.key.toLowerCase() === key);
+      if (matchedKey) {
+        event.preventDefault();
+        insertText(matchedKey.char);
+      }
+    });
+
+    document.addEventListener('mouseup', handleLongPressEnd);
+    document.addEventListener('touchend', handleLongPressEnd);
+
+    // Initialize keyboard
+    createKeyboard();
+  </script>
+</body>
+</html>
