@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gujarati Keyboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+Gujarati&family=Noto+Serif+Gujarati&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Noto Sans Gujarati', sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: #f4f4f4;
+            transition: font-family 0.3s ease;
+        }
+
+        .keyboard-container {
+            width: 100%;
+            max-width: 600px;
+            padding: 10px;
+        }
+
+        #output {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .keyboard {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .key-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .key {
+            flex: 1;
+            margin: 0 5px;
+            padding: 10px;
+            font-size: 1rem;
+            text-align: center;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .key:active {
+            background-color: #e0e0e0;
+        }
+
+        .key-popup {
+            position: absolute;
+            bottom: 50px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            padding: 5px;
+            z-index: 10;
+            display: none;
+        }
+
+        .key-popup span {
+            display: block;
+            padding: 5px;
+            cursor: pointer;
+        }
+
+        .key-popup span:hover {
+            background-color: #e0e0e0;
+        }
+
+        .font-selector {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 10px;
+        }
+
+        .font-selector button {
+            margin: 0 10px;
+            padding: 10px;
+            font-size: 1rem;
+            cursor: pointer;
+            background-color: #ffffff;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .font-selector button:hover {
+            background-color: #e0e0e0;
+        }
+    </style>
+</head>
+<body>
+    <div class="keyboard-container">
+        <div class="font-selector">
+            <button id="notoSansButton">Noto Sans Gujarati</button>
+            <button id="notoSerifButton">Noto Serif Gujarati</button>
+        </div>
+        <textarea id="output" placeholder="Type here..." rows="5"></textarea>
+        <div class="keyboard" id="keyboard">
+            <!-- Row 1 -->
+            <div class="key-row">
+                <button class="key" data-main="ૺ" data-hold="ૻ,ૼ,૽,૾,૿,ઁ,ં,ઃ">q</button>
+                <button class="key" data-main="વ">w</button>
+                <button class="key" data-main="ે" data-hold="ે,ૈ,એ,ઐ,ૅ,ઍ">e</button>
+                <button class="key" data-main="ર" data-hold="્ર,ૃ,ર્,ૄ,ઋ,ૠ">r</button>
+                <button class="key" data-main="ત" data-hold="થ,ટ,ઠ,ત્ર">t</button>
+                <button class="key" data-main="ય" data-hold="ઞ">y</button>
+                <button class="key" data-main="ુ" data-hold="ુ,ૂ,ઉ,ઊ">u</button>
+                <button class="key" data-main="િ" data-hold="ી,ઇ,ઈ">i</button>
+                <button class="key" data-main="ો" data-hold="ૌ,ઓ,ઔ,ૉ,ઑ">o</button>
+                <button class="key" data-main="પ">p</button>
+            </div>
+            <!-- Row 2 -->
+            <div class="key-row">
+                <button class="key" data-main="ા" data-hold="અ,આ">a</button>
+                <button class="key" data-main="સ" data-hold="શ,ષ,શ્ર">s</button>
+                <button class="key" data-main="દ" data-hold="ધ,ડ,ઢ,દ્ધ,દ્વ,દ્ય,દ્દ,દ્ન,દ્મ">d</button>
+                <button class="key" data-main="ફ">f</button>
+                <button class="key" data-main="ગ" data-hold="ઘ,ઙ">g</button>
+                <button class="key" data-main="હ" data-hold="હ્મ,હ્ય,હ્લ,હ્ન,હ્વ">h</button>
+                <button class="key" data-main="જ" data-hold="ઝ,જ્ઞ,ઞ">j</button>
+                <button class="key" data-main="ક" data-hold="ખ,ક્ત">k</button>
+                <button class="key" data-main="લ" data-hold="ળ,ૢ,ૣ,ઌ,ૡ">l</button>
+            </div>
+            <!-- Row 3 -->
+            <div class="key-row">
+                <button class="key" data-main="ં" data-hold="઼,ઁ,ઃ,ઽ,ૐ,૱">z</button>
+                <button class="key" data-main="્ક" data-hold="ષ">x</button>
+                <button class="key" data-main="ચ" data-hold="છ">c</button>
+                <button class="key" data-main="વ">v</button>
+                <button class="key" data-main="બ" data-hold="ભ">b</button>
+                <button class="key" data-main="ન" data-hold="ણ">n</button>
+                <button class="key" data-main="મ">m</button>
+            </div>
+        </div>
+    </div>
+    <script>
+        // Font Switching
+        document.getElementById('notoSansButton').addEventListener('click', () => {
+            document.body.style.fontFamily = "'Noto Sans Gujarati', sans-serif";
+        });
+
+        document.getElementById('notoSerifButton').addEventListener('click', () => {
+            document.body.style.fontFamily = "'Noto Serif Gujarati', serif";
+        });
+
+        // Keyboard Functionality
+        document.querySelectorAll('.key').forEach((key) => {
+            const mainChar = key.getAttribute('data-main');
+            const holdChars = key.getAttribute('data-hold')?.split(',') || [];
+
+            key.addEventListener('click', () => {
+                const output = document.getElementById('output');
+                output.value += mainChar;
+            });
+
+            key.addEventListener('touchstart', (e) => {
+                e.preventDefault();
+                if (holdChars.length > 0) {
+                    showPopup(key, holdChars);
+                }
+            });
+
+            key.addEventListener('touchend', () => {
+                hidePopup(key);
+            });
+        });
+
+        function showPopup(key, chars) {
+            let popup = key.querySelector('.key-popup');
+            if (!popup) {
+                popup = document.createElement('div');
+                popup.classList.add('key-popup');
+                chars.forEach((char) => {
+                    const span = document.createElement('span');
+                    span.textContent = char;
+                    span.addEventListener('click', () => {
+                        const output = document.getElementById('output');
+                        output.value += char;
+                        hidePopup(key);
+                    });
+                    popup.appendChild(span);
+                });
+                key.appendChild(popup);
+            }
+            popup.style.display = 'block';
+        }
+
+        function hidePopup(key) {
+            const popup = key.querySelector('.key-popup');
+            if (popup) popup.style.display = 'none';
+        }
+    </script>
+</body>
+</html>
