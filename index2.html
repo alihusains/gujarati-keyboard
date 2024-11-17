@@ -16,7 +16,6 @@
             align-items: center;
             height: 100vh;
             background-color: #f4f4f4;
-            transition: font-family 0.3s ease;
         }
 
         .keyboard-container {
@@ -47,9 +46,9 @@
 
         .key {
             flex: 1;
-            margin: 0 5px;
+            margin: 0 3px;
             padding: 10px;
-            font-size: 1.2rem;
+            font-size: 1rem;
             text-align: center;
             background-color: #ffffff;
             border: 1px solid #ccc;
@@ -65,6 +64,10 @@
         .key small {
             font-size: 0.7rem;
             color: #555;
+        }
+
+        .key span {
+            font-size: 1.5rem;
         }
 
         .key-popup {
@@ -150,7 +153,7 @@
                     <small>y</small>
                 </div>
             </div>
-            <!-- Additional rows omitted for brevity -->
+            <!-- Additional rows go here -->
         </div>
     </div>
     <script>
@@ -170,11 +173,13 @@
 
             let popupTimeout;
 
-            key.addEventListener('mousedown', () => {
+            key.addEventListener('mousedown', (event) => {
+                event.preventDefault();
                 popupTimeout = setTimeout(() => showPopup(key, holdChars), 500);
             });
 
-            key.addEventListener('mouseup', () => {
+            key.addEventListener('mouseup', (event) => {
+                event.preventDefault();
                 clearTimeout(popupTimeout);
                 if (!key.querySelector('.key-popup')) {
                     appendToOutput(mainChar);
